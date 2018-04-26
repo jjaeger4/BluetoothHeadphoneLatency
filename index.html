@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Page Title</title>
+	</head>
+	<body>
+		<div id="app">
+
+			<h3>Audio Latency</h3>
+			<button id="begin">Start / Stop</button>
+			<div>
+				<audio id="audio" controls>
+					<source src="Floating_Also.mp3" type="audio/mp3">
+					Your browser ain't got no support
+				</audio>
+			</div>
+			<div>Timer:</div>
+			<div id="timer"></div>
+
+			<strong>Running Average: </strong><span id="average"></span>
+			<table id="record" border="1" style="border-collapse: collapse; width: 150px;">
+				<tr>
+					<th>ms</th>
+				</tr>
+			</table>
+		</div>
+
+		<script>
+				function addRecord(ms) {
+					var tbl = document.getElementById('record');
+
+					var newtr = document.createElement('tr');
+					var newtd = document.createElement('td');
+					var node = document.createTextNode(ms);
+
+					newtd.appendChild(node);
+					newtr.appendChild(newtd);
+					tbl.appendChild(newtr);
+					// Calculate the average
+					var avgElem = document.getElementById('average');
+					avgElem.innerHTML = Math.ceil(milTotal / playTimes);
+				}
+
+				var t = document.getElementById('timer');
+				var a = document.getElementById('audio');
+				var timerActive = false;
+				var int = undefined;
+				var mil = 0;
+
+				var playTimes = 0;
+				var milTotal = 0;
+	
+				document.getElementById('begin').addEventListener('click', function() {
+					if (!timerActive) {
+						timerActive = true;
+						mil = 0;
+						t.innerHTML = '';
+						a.play();
+						int = setInterval(function() {
+							mil++;
+							t.innerHTML = mil;
+						}, 1);
+					} else {
+						a.pause();
+						clearInterval(int);
+						timerActive = false;
+						playTimes++;
+						milTotal = milTotal + mil;
+						addRecord(mil);
+					}
+				});
+	
+			</script>
+	</body>
+</html>
