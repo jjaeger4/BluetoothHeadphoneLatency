@@ -5,7 +5,7 @@ This project is a very simple tool to help determine audio delays using bluetoot
 ### Use It
 
 You can use the tool right here on GitHub. Enjoy!
-(https://jjaeger4.github.io/BluetoothHeadphoneLatency/)
+https://jjaeger4.github.io/BluetoothHeadphoneLatency/
 
 #### Attributions
 
